@@ -48,3 +48,15 @@ volumes:
   pgdata:
   uploads:
   applogs:
+
+    citizen_mcp:
+      build: ./app
+      command: ["mcp", "run", "citizen_mcp.py", "--transport", "sse", "--port", "8001", "--host", "0.0.0.0"]
+    ports:
+      - "8001:8001"
+    depends_on:
+      - app
+      - db
+    environment:
+      - DATABASE_URL=postgres://sewasetu:sewasetu123@db:5432/sewasetu
+
